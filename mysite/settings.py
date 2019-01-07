@@ -25,7 +25,7 @@ SECRET_KEY = 'yr(k**u1gtk0a7w6ag^r-r+s)xzj+luhy)07)yol&@o(-ryo8m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mpgadge.pythonanywhere.com']
 
 
 # Application definition
