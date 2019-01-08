@@ -1,42 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load staticfiles %}
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
 
 </head>
-<body><br>
-    <div class="container">
-            <form>
-                  <div class="form-group">
-                    <input type="text" name="lngInput" class="form-control" id="lngInputid" aria-describedby="emailHelp" placeholder="Enter any text to translate">
-                  </div>
-                  <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select Lanaguage
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                          <button class="dropdown-item" type="button">Hindi (hi)</button>
-                          <button class="dropdown-item" type="button">Japanese (ja)</button>
-                          <button class="dropdown-item" type="button">Korean (ko)</button>
-                      </div>
-                  </div>
+    <body>
+        <div class="tile is-ancestor">
+              <div class="tile is-parent">
+              </div>
 
-                  <div class="form-group">
-                      <br>
-                    <input type="text" name="lngoutput" disabled class="form-control" id="lngOutputID" aria-describedby="emailHelp" placeholder="Your Output will appear here">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+              <div class="tile is-vertical is-8">
+                <div class="tile is-parent">
+                  <article class="tile is-child notification is-primary">
+                     <h3 class="title">Language Translator</h3>
+                    <div class="content">
 
-</body>
+
+                                    <div class="columns is-mobile">
+                                        <div class="column is-half is-offset-one-quarter">
+
+                                            <form action="{% url 'home' %}" method="POST">
+                                                {% csrf_token %}
+                                                {% for field in form %}
+                                                    <div class="field">
+                                                        <label for="{{field.id_for_label}}" class="label">{{ field.label}}</label>
+
+                                                        <!-- This code used to point out particuler field in form
+                                                        {% if field.name in "converted_text" %}
+                                                                {{translated_obj.text}}
+                                                        {% endif %}
+                                                        -->
+                                                        {{ field }}
+                                                    </div>
+                                                {% endfor %}
+                                                {{translated_obj.text}}<br>
+
+                                                <button type="submit"  class="button is-sucess"> Translate</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                    </div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="tile is-parent">
+              </div>
+
+        </div>
+
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    </body>
 </html>
