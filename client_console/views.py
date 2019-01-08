@@ -15,13 +15,16 @@ def home(request):
             src_langauge = form.cleaned_data['src_langauge']
             dest_langauge = form.cleaned_data['dest_langauge']
 
+            if src_langauge=='SELECT' or dest_langauge=='SELECT':
+                pass
             translator = Translator()
-            translated_obj=translator.translate(text_to_convert,dest=dest_langauge,src=src_langauge)
-            #print(translated_obj.text)
-            form.cleaned_data['converted_text']=translated_obj.text
-            context.update({'translated_obj':translated_obj})
-            print(form.cleaned_data['converted_text'])
-
-
-
-    return render(request,'client_console/home.html',context)
+            try:
+                translator = Translator()
+                translated_obj = translator.translate(text_to_convert, dest=dest_langauge, src=src_langauge)
+                form.cleaned_data['converted_text'] = translated_obj.text
+                context.update({'translated_obj': translated_obj})
+            except Exception as ex:
+                context.update({'Exception':ex})
+                print(ex)
+                return render(request,'client_console/home.html',context)
+    return render(request, 'client_console/home.html', context)
